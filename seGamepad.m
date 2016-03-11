@@ -162,7 +162,11 @@ classdef seGamepad < handle
                             % ---------------------------- %
                             % Check for Accepted Responses %
                             % ---------------------------- %
-                            foundResponses = intersect(KbName(KbName(keyCode)), obj.acceptedResponses);
+                            if ispc
+                                foundResponses = intersect(keyCode, obj.acceptedResponses);
+                            elseif ismac
+                                foundResponses = intersect(KbName(KbName(keyCode)), obj.acceptedResponses);
+                            end
                             
                             if(~isempty(foundResponses))
                                                                 
